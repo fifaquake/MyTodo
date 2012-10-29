@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%= title %>-MyTodo</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <script src="/javascripts/jquery.js"></script>
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $("#home").removeClass("active");
+        $("#login").removeClass("active");
+        $("#logout").removeClass("active");
+      });
+  </script>
   </head>
   <body>
   	<div class = "navbar">
@@ -11,9 +19,9 @@
 				<a class = "brand" href = "/">MyTodo</a>
 				<div class = "nav-collapse">
 					<ul class = "nav">
-						<li class = "active"><a href ="/">主页</a></li>
-						<li><a href = "/">登陆</a></li>
-						<li><a href = "/">注册</a></li>
+						<li id = "home" class = "active"><a href ="/">主页</a></li>
+						<li id = "login"><a href = "/">登陆</a></li>
+						<li id = "logout"><a href = "/">注册</a></li>
 					</ul>
 				</div>
 			</div>

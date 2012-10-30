@@ -1,4 +1,19 @@
-## This file is used to start mongo db
+## This file is used to start mongo db server.
 
 import os
-os.system("z:\\mongodb\\bin\\mongod.exe --dbpath=z:\\database")
+
+# get directory name
+dirname = os.path.dirname(os.getcwd())
+
+# get mongod.exe full path
+mongoexe = os.path.join(dirname, "thirdparties", "mongodb", "bin", "mongod.exe")
+
+# get database name
+mongodatapath = os.path.join(dirname, "database")
+
+# Todo:Check the directory and create it.
+
+# combine command
+cmd = mongoexe + " --dbpath=" + mongodatapath
+
+os.system(cmd)

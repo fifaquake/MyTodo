@@ -9,6 +9,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+var MemStore = express.session.MemoryStore;
+
 var app = express();
 
 app.configure(function(){
@@ -21,7 +23,15 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+  app.use(express.session({
+    secret: 'secret_key', store: MemStore({
+      reapInterval: 60000 * 10
+    })
+  }));
+  app.use(function(req,res,next){
+    res.locals.user = req.session.user;
+    next();
+  });
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });

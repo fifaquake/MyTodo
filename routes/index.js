@@ -27,7 +27,7 @@ exports.doReg = function(req,res) {
   var md5passsword = md5.update(req.body.password).digest('base64');
   
   var newUser = new User({
-      name: req.body.username,
+      name: req.body.userName,
           password: md5passsword,
       });
 

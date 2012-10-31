@@ -11,8 +11,9 @@ mongoexe = os.path.join(dirname, "thirdparties", "mongodb", "bin", "mongod.exe")
 # get database name
 mongodatapath = os.path.join(dirname, "database")
 
-# Todo:Check the directory and create it.
-
+# Check the directory and create it if it is not exists.
+if (not os.path.exists(mongodatapath)):
+    os.mkdir(mongodatapath)
 # combine command
 cmd = mongoexe + " --dbpath=" + mongodatapath
 

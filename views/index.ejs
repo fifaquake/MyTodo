@@ -1,3 +1,4 @@
+<% if (!locals.user) { %>
 <div class="hero-unit">
 	<h1>欢迎使用MyTodo</h1>
 	<p>MyTodo是一个简单易用的GTD系统</p>
@@ -6,6 +7,11 @@
 		<a class="btn btn-large" href = "/reg">立即注册</a>
 	</p>
 </div>
+
+<% } else { %>
+<%- partial('content')%>
+<% } %>
+
 
 <script type="text/javascript">
   $(document).ready(function() {

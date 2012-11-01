@@ -31,6 +31,26 @@ exports.login = function(req, res) {
   return;
 }
 
+exports.doLogin = function(req, res) {
+  var md5 = crypto.createHash('md5');
+  var md5Password = md5.update(req.body.password).digest('base64');
+
+  var newUser = new User({
+    name: req.body.userName,
+    password:md5Password,
+  });
+
+  User.get(newUser.name, function(err, user){
+    if (!user) {
+      return res.redirect('/login');
+    };
+    if (newUser.password != user.password) {
+      return res.redirect('/login');
+    };
+    req.session.user = newUser;
+    res.redirect('/');
+  });
+}
 exports.doReg = function(req,res) {
   if(req.body['repeat_password'] != req.body['password']) {
     //req.flash('info', 'Different Passwords!');

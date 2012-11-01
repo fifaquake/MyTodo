@@ -44,6 +44,7 @@ app.get('/', routes.index);
 app.get('/reg', routes.reg);
 app.post('/reg', routes.doReg);
 app.get('/logout', routes.logout);
+app.get('/login', routes.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

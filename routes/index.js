@@ -24,6 +24,13 @@ exports.logout = function(req, res) {
   return res.redirect('/');
 }
 
+exports.login = function(req, res) {
+
+  res.render('login', {title : '登陆'});
+
+  return;
+}
+
 exports.doReg = function(req,res) {
   if(req.body['repeat_password'] != req.body['password']) {
     //req.flash('info', 'Different Passwords!');

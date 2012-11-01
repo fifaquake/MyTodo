@@ -1,4 +1,4 @@
-
+﻿
 /*
  * GET home page.
  */
@@ -16,6 +16,12 @@ exports.reg = function(req, res) {
   res.render('register', {title: '注册'});
 
   return;
+}
+
+exports.logout = function(req, res) {
+  req.session.user = null;
+  
+  return res.redirect('/');
 }
 
 exports.doReg = function(req,res) {

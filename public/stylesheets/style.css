@@ -29,6 +29,10 @@
   overflow: hidden;
 }
 
+.tile.double {
+  width: 310px;
+}
+
 .tile .tile-content {
   width: 100%;
   height: 100%;

@@ -15,7 +15,8 @@ exports.index = function(req, res){
 }
 
 exports.addContent = function(req, res) {
-  var newTodoItem = new TodoItem(req.body['todoinput'], 'hardcode', 3);
+  var newDate = new Date();
+  var newTodoItem = new TodoItem(req.body['todoinput'], newDate.toDateString(), req.body['todoPriority']);
   res.locals.user.TodoItems.push(newTodoItem);
   
   return res.redirect('content');

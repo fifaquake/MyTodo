@@ -27,6 +27,11 @@
     <div class="span10">
       <form class="form-inline" id = "todoform" method = "post">
       <input id ="todoinput" name = "todoinput" type="text" style= "width:800px" placeholder="轻击输入，回车添加">
+      <select id="todoPriority" name = "todoPriority">
+        <option>要事</option>
+        <option>一般</option>
+        <option>无所谓</option>
+      </select>
       </form>
       <div class = "tile-group">
       <%- partial('todoitem', locals.user.TodoItems) %>

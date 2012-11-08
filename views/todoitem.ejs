@@ -1,4 +1,10 @@
+<% if (todoitem.status == "要事") { %>
+<div class = "tile bg-color-pink">
+<% } else if (todoitem.status == "一般") { %>
 <div class = "tile bg-color-blue">
+<% } else { %>
+<div class = "tile bg-color-green">
+<% } %>
   <div class = "tile-content">
   <p><%= todoitem.content%></p>
   

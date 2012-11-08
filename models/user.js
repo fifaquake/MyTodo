@@ -8,6 +8,32 @@ function User(user) {
 };
 module.exports = User;
 
+User.prototype.addTodoItem = function addTodoItem(item, callback) {
+  var curUser = this;
+  mongodb.open (function(err, db){
+    if (err) {
+      return callback(err);
+    };
+    db.collection('todoitems', function(err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      };
+
+      var newTodoItem = {
+        name : curUser.name,
+        content: item.content,
+        date : item.date,
+        status : item.status
+      };
+      collection.insert(newTodoItem, {safe:true}, function(err, user) {
+        mongodb.close();
+        callback(err, newTodoItem);
+      });
+    });
+  });
+}
+
 User.prototype.save = function save(callback) {
   var user = {
     name: this.name,
@@ -34,6 +60,32 @@ User.prototype.save = function save(callback) {
   });
 }
 
+User.prototype.getTodoItems = function getTodoItems(username, callback) {
+  mongodb.open(function(err, db) {
+    if (err) {
+      return callback(err);
+    };
+
+    db.collection('todoitems', function(err, collection) {
+      if (err) {
+        mongodb.close();
+      };
+
+      collection.find({name : username}, function(err, docs){
+       
+        if (docs) {
+          docs.toArray(function(err, items) {
+             mongodb.close();          
+            callback(err, items);
+          });
+        } else {
+          mongodb.close(); 
+          callback(err, null);
+        }
+      });
+    });
+  });
+}
 User.get = function get(username, callback) {
   mongodb.open(function (err, db) {
     if (err) {

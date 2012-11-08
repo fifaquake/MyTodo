@@ -6,8 +6,6 @@ var crypto = require('crypto');
 var User = require('../models/user.js');
 var TodoItem = require('../models/todoItem.js');
 
-
-
 exports.index = function(req, res){
   res.render('index', {title: '主页'});
 
@@ -17,13 +15,25 @@ exports.index = function(req, res){
 exports.addContent = function(req, res) {
   var newDate = new Date();
   var newTodoItem = new TodoItem(req.body['todoinput'], newDate.toDateString(), req.body['todoPriority']);
-  res.locals.user.TodoItems.push(newTodoItem);
-  
-  return res.redirect('content');
+
+  var curUser = new User(res.locals.user);
+
+  curUser.addTodoItem(newTodoItem, function(err, TodoItem){
+      res.locals.user.TodoItems.push(newTodoItem);
+      return res.redirect('content');
+  });
 }
 
 exports.showContent = function(req, res) {
-  res.render('content', {title :'主页'});
+  var curUser = new User(res.locals.user);
+  curUser.getTodoItems(curUser.name, function(err, items) {
+    for (var i = 0; i < items.length; i++) {
+      var newTodoItem = new TodoItem(items[i].content, items[i].date, items[i].status);
+      curUser.TodoItems.push(newTodoItem);
+    }
+    res.locals.user = curUser;
+    res.render('content', {title :'主页'});
+  });
 }
 
 exports.reg = function(req, res) {

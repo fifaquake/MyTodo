@@ -5,8 +5,6 @@ function User(user) {
   this.name = user.name;
   this.password = user.password;
   this.TodoItems = [];
-  this.TodoItems[0] = new TodoItem("First Task", "2012-11-01", 0);
-  this.TodoItems[1] = new TodoItem("Second Task", "2012-11-03", 1);
 };
 module.exports = User;
 

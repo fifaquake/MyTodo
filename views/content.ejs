@@ -25,9 +25,8 @@
       <span class="label label-success">Success</span>
     </div>
     <div class="span10">
-      <form class="form-inline">
-      <input type="text" style= "width:800px" placeholder="轻击输入，回车添加">
-      <button type="submit" class="btn">确定</button>
+      <form class="form-inline" id = "todoform" method = "post">
+      <input id ="todoinput" name = "todoinput" type="text" style= "width:800px" placeholder="轻击输入，回车添加">
       </form>
       <div class = "tile-group">
       <%- partial('todoitem', locals.user.TodoItems) %>
@@ -35,3 +34,16 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $("#todoinput").bind('keydown',function(event) {
+    if (event.which == '13') {
+      $('todoform').submit();
+    }
+  });
+
+  $(document).ready(function() {
+    $("#home").addClass("active");
+  });
+
+</script>

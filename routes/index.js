@@ -4,13 +4,26 @@
  */
 var crypto = require('crypto');
 var User = require('../models/user.js');
+var TodoItem = require('../models/todoItem.js');
+
 
 
 exports.index = function(req, res){
   res.render('index', {title: '主页'});
 
   return;
-};
+}
+
+exports.addContent = function(req, res) {
+  var newTodoItem = new TodoItem(req.body['todoinput'], 'hardcode', 3);
+  res.locals.user.TodoItems.push(newTodoItem);
+  
+  return res.redirect('content');
+}
+
+exports.showContent = function(req, res) {
+  res.render('content', {title :'主页'});
+}
 
 exports.reg = function(req, res) {
   res.render('register', {title: '注册'});
@@ -48,7 +61,7 @@ exports.doLogin = function(req, res) {
       return res.redirect('/login');
     };
     req.session.user = newUser;
-    res.redirect('/');
+    res.redirect('/content');
   });
 }
 exports.doReg = function(req,res) {

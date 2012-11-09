@@ -3,45 +3,74 @@
     <div class="span2">
       <!--Sidebar content-->
       <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header" style = "input-large">收集</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">聚焦</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">情景</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
+        <ul class="nav nav-list">
+          <li class="nav-header" style = "input-large">收集</li>
+          <li class="active">
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li class="nav-header">聚焦</li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li class="nav-header">情景</li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+        </ul>
+      </div>
+      <!--/.well -->
       <span class="label label-success">Success</span>
     </div>
     <div class="span10">
       <form class="form-inline" id = "todoform" method = "post">
-      <input id ="todoinput" name = "todoinput" type="text" style= "width:800px" placeholder="轻击输入，回车添加">
-      <select id="todoPriority" name = "todoPriority">
-        <option>要事</option>
-        <option>一般</option>
-        <option>无所谓</option>
-      </select>
-      </form>
+        <input id ="todoinput" name = "todoinput" type="text" style= "width:800px" placeholder="轻击输入，回车添加">
+          <select id="todoPriority" name = "todoPriority">
+            <option>要事</option>
+            <option>一般</option>
+            <option>无所谓</option>
+          </select>
+        </form>
       <div class = "tile-group">
-      <%- partial('todoitem', locals.user.TodoItems) %>
-      </div>    
+        <%- partial('todoitem', locals.user.TodoItems) %>
+      </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
+  
   $("#todoinput").bind('keydown',function(event) {
+    // enter key is pressed
     if (event.which == '13') {
       $('todoform').submit();
     }
@@ -49,6 +78,19 @@
 
   $(document).ready(function() {
     $("#home").addClass("active");
+    var allBrandDiv = $("div.brand");
+    debugger;
+    for (var i = 0; i < allBrandDiv.size(); i++) {
+      var curDiv = allBrandDiv.get(i);
+      $("div", curDiv).hide();
+    }
+    
+    $("div.brand").bind('mouseover', function(event) {
+      $("div", this).show();
+    });
+    $("div.brand").bind('mouseout', function(event) {
+      $("div", this).hide();
+    });
   });
 
 </script>

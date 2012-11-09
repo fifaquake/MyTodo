@@ -11,6 +11,12 @@
   </div>
   <div class = "brand">
   <span class="win8name"><%= todoitem.date%></span>
-  
+  <% if (todoitem.status == "要事") { %>
+    <div class="win8badge error bg-color-pink"></div>
+  <% } else if (todoitem.status == "一般") { %>
+    <div class="win8badge error bg-color-blue"></div>
+  <% } else { %>
+  <div class="win8badge error bg-color-green"></div>
+  <% } %>
   </div>
 </div>

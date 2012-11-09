@@ -48,6 +48,7 @@ app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
 app.get('/content', routes.showContent);
 app.post('/content', routes.addContent);
+app.get('/deleteitem/:id', routes.deleteTodoItem);
 
 http.createServer(app).listen(80, function () {
   console.log("Express server listening on port " + app.get('port'));

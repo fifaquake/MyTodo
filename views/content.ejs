@@ -82,10 +82,15 @@
     debugger;
     for (var i = 0; i < allBrandDiv.size(); i++) {
       var curDiv = allBrandDiv.get(i);
+      $("div", curDiv).bind('click', function(event){
+        var toLink = "/deleteitem/" + this.id;
+        location.href = toLink;
+      });
       $("div", curDiv).hide();
     }
     
     $("div.brand").bind('mouseover', function(event) {
+      // TODO:Show post
       $("div", this).show();
     });
     $("div.brand").bind('mouseout', function(event) {

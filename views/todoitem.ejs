@@ -1,6 +1,6 @@
-<% if (todoitem.priority == "要事") { %>
+<% if (todoitem.priority == "1") { %>
 <div class = "tile double bg-color-pink">
-<% } else if (todoitem.priority == "一般") { %>
+<% } else if (todoitem.priority == "2") { %>
 <div class = "tile bg-color-blue">
 <% } else { %>
 <div class = "tile bg-color-green">
@@ -11,9 +11,9 @@
   </div>
   <div class = "brand">
   <span class="win8name"><%= todoitem.date%></span>
-  <% if (todoitem.priority == "要事") { %>
+  <% if (todoitem.priority == "1") { %>
     <div id = <%=todoitem.id%> class="win8badge error bg-color-pink"></div>
-  <% } else if (todoitem.priority == "一般") { %>
+  <% } else if (todoitem.priority == "2") { %>
     <div id = <%=todoitem.id%> class="win8badge error bg-color-blue"></a></div>
   <% } else { %>
   <div id = <%=todoitem.id%> class="win8badge error bg-color-green"></div>

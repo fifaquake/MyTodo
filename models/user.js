@@ -1,7 +1,6 @@
 var mongodb = require('./db');
 var TodoItem = require('./todoitem');
 
-
 function User(user) {
   this.name = user.name;
   this.password = user.password;
@@ -26,7 +25,7 @@ User.prototype.addTodoItem = function addTodoItem(item, callback) {
         name: curUser.name,
         content: item.content,
         date: item.date,
-        status: item.status
+        priority: item.priority
       };
       collection.insert(newTodoItem, { safe: true }, function (err, user) {
         mongodb.close();
@@ -61,6 +60,7 @@ User.prototype.save = function save(callback) {
     });
   });
 }
+
 User.prototype.deleteTodoItem = function deleteTodoItem(idTodoItem, callback) {
   mongodb.open(function (err, db) {
     if (err) {

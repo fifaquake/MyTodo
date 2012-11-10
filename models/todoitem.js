@@ -1,7 +1,7 @@
 var mongo = require('./db');
 var GUID = require('../utility/GUID');
 
-function TodoItem(id, content, date, status) {
+function TodoItem(id, content, date, priority) {
   if (null == id) {
     this.id = GUID();
   } else {
@@ -10,8 +10,7 @@ function TodoItem(id, content, date, status) {
 
   this.content = content;
   this.date = date;
-  this.status = status;
+  this.priority = priority;
 }
-
 
 module.exports = TodoItem;

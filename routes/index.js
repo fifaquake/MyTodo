@@ -18,6 +18,7 @@ exports.deleteTodoItem = function (req, res) {
     res.redirect('/content');
   });
 }
+
 exports.addContent = function (req, res) {
   var newDate = new Date();
   var newTodoItem = new TodoItem(null, req.body['todoinput'], newDate.toDateString(), req.body['todoPriority']);
@@ -34,7 +35,7 @@ exports.showContent = function (req, res) {
   var curUser = new User(res.locals.user);
   curUser.getTodoItems(curUser.name, function (err, items) {
     for (var i = 0; i < items.length; i++) {
-      var newTodoItem = new TodoItem(items[i].id, items[i].content, items[i].date, items[i].status);
+      var newTodoItem = new TodoItem(items[i].id, items[i].content, items[i].date, items[i].priority);
       curUser.TodoItems.push(newTodoItem);
     }
     res.locals.user = curUser;

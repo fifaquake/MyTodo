@@ -15,6 +15,7 @@ exports.index = function (req, res) {
 exports.deleteTodoItem = function (req, res) {
   var curUser = new User(res.locals.user);
   curUser.deleteTodoItem(req.params.id, function (err, r) {
+    req.session.priority = "all";
     res.redirect('/content');
   });
 }
@@ -24,19 +25,29 @@ exports.addContent = function (req, res) {
   var newTodoItem = new TodoItem(null, req.body['todoinput'], newDate.toDateString(), req.body['todoPriority']);
 
   var curUser = new User(res.locals.user);
-
+ 
   curUser.addTodoItem(newTodoItem, function (err, TodoItem) {
     res.locals.user.TodoItems.push(newTodoItem);
+    req.session.priority = "all";
     return res.redirect('content');
   });
 }
 
 exports.showContent = function (req, res) {
   var curUser = new User(res.locals.user);
+  var selectPriority = req.params.select;
+
   curUser.getTodoItems(curUser.name, function (err, items) {
     for (var i = 0; i < items.length; i++) {
       var newTodoItem = new TodoItem(items[i].id, items[i].content, items[i].date, items[i].priority);
-      curUser.TodoItems.push(newTodoItem);
+      if (null == selectPriority || newTodoItem.priority == selectPriority) {
+        curUser.TodoItems.push(newTodoItem);
+      }
+    }
+    if (selectPriority == null || selectPriority == undefined) {
+      req.session.priority = "all";
+    } else {
+      req.session.priority = selectPriority;
     }
     res.locals.user = curUser;
     res.render('content', { title: '主页' });
@@ -78,6 +89,7 @@ exports.doLogin = function (req, res) {
       return res.redirect('/login');
     };
     req.session.user = newUser;
+    req.session.priority = "all";
     res.redirect('/content');
   });
 }

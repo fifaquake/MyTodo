@@ -30,6 +30,7 @@ app.configure(function () {
   }));
   app.use(function (req, res, next) {
     res.locals.user = req.session.user;
+    res.locals.priority = req.session.priority;
     next();
   });
   app.use(app.router);
@@ -47,7 +48,8 @@ app.get('/logout', routes.logout);
 app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
 app.get('/content', routes.showContent);
-app.post('/content', routes.addContent);
+app.get('/content/:select', routes.showContent); // used to filter the priority
+app.post('/content*', routes.addContent);
 app.get('/deleteitem/:id', routes.deleteTodoItem);
 
 http.createServer(app).listen(80, function () {

@@ -4,18 +4,18 @@
       <!--Sidebar content-->
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <li class="nav-header" style = "input-large">收集</li>
-          <li class="active">
-            <a href="#">Link</a>
+          <li class="nav-header" style = "input-large">优先级过滤</li>
+          <li id ="priority_all" class="active">
+            <a href="/content">全部</a>
           </li>
-          <li>
-            <a href="#">Link</a>
+          <li id ="priority_1">
+            <a href="/content/1">要事</a>
           </li>
-          <li>
-            <a href="#">Link</a>
+          <li id ="priority_2">
+            <a href="/content/2">一般</a>
           </li>
-          <li>
-            <a href="#">Link</a>
+          <li id ="priority_3">
+            <a href="/content/3">无所谓</a>
           </li>
           <li class="nav-header">聚焦</li>
           <li>
@@ -68,19 +68,30 @@
 </div>
 
 <script type="text/javascript">
-  
+
   $("#todoinput").bind('keydown',function(event) {
-    // enter key is pressed
-    if (event.which == '13') {
-      $('todoform').submit();
-    }
+  // enter key is pressed
+  if (event.which == '13') {
+  $('todoform').submit();
+  }
   });
 
   $(document).ready(function() {
-    $("#home").addClass("active");
-    var allBrandDiv = $("div.brand");
-    debugger;
-    for (var i = 0; i < allBrandDiv.size(); i++) {
+  debugger;
+  $("#home").addClass("active");
+  $("#priority_all").removeClass("active");
+  $("#priority_1").removeClass("active");
+  $("#priority_2").removeClass("active");
+  $("#priority_3").removeClass("active");
+  
+  // I want to show which priority is selected by the user.
+  // But here is a defect that it cannot be show correctly.
+  // var curPriorityId = "#priority_<%=locals.priority%>";
+  // $(curPriorityId).addClass("active");
+
+  var allBrandDiv = $("div.brand");
+  debugger;
+  for (var i = 0; i < allBrandDiv.size(); i++) {
       var curDiv = allBrandDiv.get(i);
       $("div", curDiv).bind('click', function(event){
         var toLink = "/deleteitem/" + this.id;

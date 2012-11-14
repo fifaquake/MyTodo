@@ -49,7 +49,7 @@ app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
 app.get('/content', routes.showContent);
 app.get('/content/:select', routes.showContent); // used to filter the priority
-app.post('/content*', routes.addContent);
+app.post('/content', routes.addContent);
 app.get('/deleteitem/:id', routes.deleteTodoItem);
 
 http.createServer(app).listen(80, function () {

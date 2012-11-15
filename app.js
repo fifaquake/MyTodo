@@ -7,7 +7,11 @@ var express = require('express')
   , partials = require('express-partials')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , login = require('/routes/login.js')
+  , reg = require('./routes/reg.js')
+  , content = require('./routes/content.js')
+  , logout = require('./routes/logout.js')
 
 var MemStore = express.session.MemoryStore;
 
@@ -42,15 +46,15 @@ app.configure('development', function () {
 });
 
 app.get('/', routes.index);
-app.get('/reg', routes.reg);
-app.post('/reg', routes.doReg);
-app.get('/logout', routes.logout);
-app.get('/login', routes.login);
-app.post('/login', routes.doLogin);
-app.get('/content', routes.showContent);
-app.get('/content/:select', routes.showContent); // used to filter the priority
-app.post('/content', routes.addContent);
-app.get('/deleteitem/:id', routes.deleteTodoItem);
+app.get('/reg', reg.reg);
+app.post('/reg', reg.doReg);
+app.get('/logout', logout.logout);
+app.get('/login', login.login);
+app.post('/login', login.doLogin);
+app.get('/content', content.showContent);
+app.get('/content/:select', content.showContent); // used to filter the priority
+app.post('/content', content.addContent);
+app.get('/deleteitem/:id', content.deleteTodoItem);
 
 http.createServer(app).listen(80, function () {
   console.log("Express server listening on port " + app.get('port'));

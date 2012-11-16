@@ -53,7 +53,9 @@ app.get('/login', login.login);
 app.post('/login', login.doLogin);
 app.get('/content', content.showContent);
 app.get('/content/:select', content.showContent); // used to filter the priority
-app.post('/content', content.addContent);
+
+// fixed the defect that we cannot add new item druring filter items
+app.post('/content*', content.addContent);
 app.get('/deleteitem/:id', content.deleteTodoItem);
 
 http.createServer(app).listen(80, function () {

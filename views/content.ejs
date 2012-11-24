@@ -131,6 +131,7 @@
           jsonp:'callback',
           timeout: 5000,
           type: 'POST',
+          data: "todoinput="+$("#todoinput").val() + "&" +"todoPriority=" + $("#todoPriority").val(),
           success: function(data) {
             alert(data);
           },

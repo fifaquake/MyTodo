@@ -26,9 +26,11 @@ exports.addContent = function (req, res) {
   var curUser = new User(res.locals.user);
  
   curUser.addTodoItem(newTodoItem, function (err, TodoItem) {
+    var queryObj = url.parse(req.url, true).query;
     res.locals.user.TodoItems.push(newTodoItem);
     req.session.priority = "all";
-    return res.redirect('content');
+    //res.send(queryObj.callback + '(\'{"id": newTodoItem.id }\')');
+    res.send(queryObj.callback + '(\'{"id":' + newTodoItem.id + '}\')');
   });
 }
 

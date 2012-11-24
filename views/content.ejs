@@ -52,8 +52,12 @@
       <span class="label label-success">Success</span>
     </div>
     <div class="span10">
-      <form class="form-inline" id = "todoform" method = "post">
-        <input id ="todoinput" name = "todoinput" type="text" style= "width:800px" placeholder="轻击输入，回车添加">
+      <form class="form-inline" id = "todoform" method ="post">
+        <input id ="todoinput" name = "todoinput" type="text" style= "width:800px" placeholder="轻击输入，回车添加" />
+        <!--
+        The following input is used to avoid the automatically submit without using ajax.
+        -->
+        <input type ="text" id ="hideinput"/>
           <select id="todoPriority" name = "todoPriority">
             <option value ="1">要事</option>
             <option value ="2">一般</option>
@@ -69,28 +73,21 @@
 
 <script type="text/javascript">
 
-  $("#todoinput").bind('keydown',function(event) {
-  // enter key is pressed
-  if (event.which == '13') {
-  $('todoform').submit();
-  }
-  });
-
   $(document).ready(function() {
-  $("#home").addClass("active");
-  $("#priority_all").removeClass("active");
-  $("#priority_1").removeClass("active");
-  $("#priority_2").removeClass("active");
-  $("#priority_3").removeClass("active");
+    $("#home").addClass("active");
+    $("#priority_all").removeClass("active");
+    $("#priority_1").removeClass("active");
+    $("#priority_2").removeClass("active");
+    $("#priority_3").removeClass("active");
   
-  // I want to show which priority is selected by the user.
-  // But here is a defect that it cannot be show correctly.
-  // var curPriorityId = "#priority_<%=locals.priority%>";
-  // $(curPriorityId).addClass("active");
+    // I want to show which priority is selected by the user.
+    // But here is a defect that it cannot be show correctly.
+    // var curPriorityId = "#priority_<%=locals.priority%>";
+    // $(curPriorityId).addClass("active");
 
-  var allBrandDiv = $("div.brand");
-  debugger;
-  for (var i = 0; i < allBrandDiv.size(); i++) {
+    // binding the "delete" for ajax
+    var allBrandDiv = $("div.brand");
+    for (var i = 0; i < allBrandDiv.size(); i++) {
       var curDiv = allBrandDiv.get(i);
       $("div", curDiv).bind('click', function(event) {
         $(this).parent().parent().remove();
@@ -115,9 +112,34 @@
       // TODO:Show post
       $("div", this).show();
     });
+    
     $("div.brand").bind('mouseout', function(event) {
       $("div", this).hide();
     });
+    
+    // hide the "hideinput", "hideinput is just used to avoid the automatically submit
+    $("#hideinput").hide();
+    $("#todoinput").bind('keydown',function(event) {
+      // enter key is pressed
+      if (event.which == '13'){
+       debugger;
+      var toLink = "/content";
+      $.ajax({
+          url: toLink,
+          dataType: "jsonp",
+          cache: false,
+          jsonp:'callback',
+          timeout: 5000,
+          type: 'POST',
+          success: function(data) {
+            alert(data);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + " " + errorThrown);
+          }
+        });
+        
+      }
+    });
   });
-
 </script>

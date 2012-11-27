@@ -133,7 +133,34 @@
           type: 'POST',
           data: "todoinput="+$("#todoinput").val() + "&" +"todoPriority=" + $("#todoPriority").val(),
           success: function(data) {
-            alert(data);
+            //var newDiv = "<div>" + data["content"] +" </div>";
+            
+            var tileDivStart = null;
+            if (data["priority"] == 1) {
+              tileDivStart = '<div class = "tile double bg-color-pink">';
+            } else if (data["priority"] == 2) {
+              tileDivStart ='<div class = "tile bg-color-blue">';
+            } else {
+              tileDivStart = '<div class = "tile bg-color-green">';
+            }
+            
+            var tileContent = '<div class = "tile-content">' + '<p>' + data["content"] + '</p>' + '</div>';
+            var brand = '<div class = "brand">';
+            var span = '<span class="win8name">' + data["date"] + '</span>';
+            
+            var divID = null;
+            if (data["priority"] == 1) {
+              divID = '<div id =' + data["id"] + ' class="win8badge error bg-color-pink"></div>';
+            } else if (data["priority"] == 2) {
+              divID = '<div id =' + data["id"] + ' class="win8badge error bg-color-blue"></div>';
+            }
+            else {
+              divID = '<div id = ' + data["id"] + ' class="win8badge error bg-color-green"></div>';
+            }
+            var endDiv= '</div>';
+            
+            var newDiv = tileDivStart + tileContent + brand + span + divID + endDiv + endDiv;
+            $(".tile-group").append(newDiv);
           },
           error: function(jqXHR, textStatus, errorThrown) {
             alert('error ' + textStatus + " " + errorThrown);

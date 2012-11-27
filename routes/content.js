@@ -29,8 +29,15 @@ exports.addContent = function (req, res) {
     var queryObj = url.parse(req.url, true).query;
     res.locals.user.TodoItems.push(newTodoItem);
     req.session.priority = "all";
-    //res.send(queryObj.callback + '(\'{"id": newTodoItem.id }\')');
-    res.send(queryObj.callback + '(\'{"id":' + newTodoItem.id + '}\')');
+    var result = {
+      "id": newTodoItem.id,
+      "priority": newTodoItem.priority,
+      "date": newTodoItem.date,
+      "content": newTodoItem.content
+    };
+    var resultString = JSON.stringify(result);
+
+    res.send(queryObj.callback + '(' + resultString + ')');
   });
 }
 

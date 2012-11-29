@@ -6,7 +6,8 @@ import os
 dirname = os.path.dirname(os.getcwd())
 
 # get mongod.exe full path
-mongoexe = os.path.join(dirname, "thirdparties", "mongodb", "bin", "mongod.exe")
+mongoexe = os.path.join(dirname, "thirdparties",
+    "mongodb", "bin", "mongod.exe")
 
 # get database name
 mongodatapath = os.path.join(dirname, "database")

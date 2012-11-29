@@ -13,10 +13,10 @@ npm_install = "npm install"
 os.system(npm_install)
 
 #get app.js
-app = os.path.join(dirname, "app.js");
+app = os.path.join(dirname, "app.js")
 node = "node"
 
 #combine command
 cmd = node + " " + app
 
-os.system(cmd);
+os.system(cmd)

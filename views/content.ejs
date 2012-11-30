@@ -133,8 +133,6 @@
           type: 'POST',
           data: "todoinput="+$("#todoinput").val() + "&" +"todoPriority=" + $("#todoPriority").val(),
           success: function(data) {
-            //var newDiv = "<div>" + data["content"] +" </div>";
-            
             var tileDivStart = null;
             if (data["priority"] == 1) {
               tileDivStart = '<div class = "tile double bg-color-pink">';
@@ -160,7 +158,31 @@
             var endDiv= '</div>';
             
             var newDiv = tileDivStart + tileContent + brand + span + divID + endDiv + endDiv;
-            $(".tile-group").append(newDiv);
+            var curDiv = $(".tile-group").append(newDiv);
+            $("#"+data['id'], curDiv).bind('click', function(event) {
+              $(this).parent().parent().remove();
+              var toLink = "/deleteitem/" + this.id;
+              $.ajax({
+                url: toLink,
+                dataType: "jsonp",
+                cache: false,
+                jsonp:'callback',
+                timeout: 5000,
+                success: function(data) {
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                  alert('error ' + textStatus + " " + errorThrown);
+                }
+              });
+            });
+            $("#"+data['id'], curDiv).hide();
+            $("div.brand", curDiv).bind('mouseover', function(event) {
+              $("div", this).show();
+            });
+            $("div.brand", curDiv).bind('mouseout', function(event) {
+              $('div', this).hide();
+            });
+            
           },
           error: function(jqXHR, textStatus, errorThrown) {
             alert('error ' + textStatus + " " + errorThrown);

@@ -6,7 +6,7 @@ exports.login = function (req, res) {
   res.render('login', { title: '登陆' });
 
   return;
-}
+};
 
 exports.doLogin = function (req, res) {
   var md5 = crypto.createHash('md5');
@@ -20,12 +20,12 @@ exports.doLogin = function (req, res) {
   User.get(newUser.name, function (err, user) {
     if (!user) {
       return res.redirect('/login');
-    };
+    }
     if (newUser.password != user.password) {
       return res.redirect('/login');
-    };
+    }
     req.session.user = newUser;
-    req.session.priority = "all";
+    req.session.priority = 'all';
     res.redirect('/content');
   });
-}
+};

@@ -3,15 +3,15 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , partials = require('express-partials')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path')
-  , login = require('./routes/login.js')
-  , reg = require('./routes/reg.js')
-  , content = require('./routes/content.js')
-  , logout = require('./routes/logout.js')
+var express = require('express'),
+  partials = require('express-partials'),
+  routes = require('./routes'),
+  http = require('http'),
+  path = require('path'),
+  login = require('/routes/login.js'),
+  reg = require('./routes/reg.js'),
+  content = require('./routes/content.js'),
+  logout = require('./routes/logout.js');
 
 var MemStore = express.session.MemoryStore;
 
@@ -28,7 +28,8 @@ app.configure(function () {
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session({
-    secret: 'secret_key', store: MemStore({
+    secret: 'secret_key',
+    store: new MemStore({
       reapInterval: 60000 * 10
     })
   }));
@@ -59,5 +60,5 @@ app.post('/content*', content.addContent);
 app.get('/deleteitem/:id', content.deleteTodoItem);
 
 http.createServer(app).listen(80, function () {
-  console.log("Express server listening on port " + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });

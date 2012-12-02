@@ -5,7 +5,7 @@ function User(user) {
   this.name = user.name;
   this.password = user.password;
   this.TodoItems = [];
-};
+}
 module.exports = User;
 
 User.prototype.addTodoItem = function addTodoItem(item, callback) {
@@ -13,15 +13,15 @@ User.prototype.addTodoItem = function addTodoItem(item, callback) {
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
-    };
+    }
     db.collection('todoitems', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
-      };
+      }
 
       var newTodoItem = {
-        id : item.id,
+        id: item.id,
         name: curUser.name,
         content: item.content,
         date: item.date,
@@ -33,7 +33,7 @@ User.prototype.addTodoItem = function addTodoItem(item, callback) {
       });
     });
   });
-}
+};
 
 User.prototype.save = function save(callback) {
   var user = {
@@ -59,37 +59,37 @@ User.prototype.save = function save(callback) {
       });
     });
   });
-}
+};
 
 User.prototype.deleteTodoItem = function deleteTodoItem(idTodoItem, callback) {
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
-    };
+    }
 
     db.collection('todoitems', function (err, collection) {
       if (err) {
         mongodb.close();
-      };
+      }
 
       collection.remove({ id: idTodoItem }, function (err, r) {
-          mongodb.close();
-          callback(err, null);
+        mongodb.close();
+        callback(err, null);
       });
     });
   });
-}
+};
 
 User.prototype.getTodoItems = function getTodoItems(username, callback) {
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
-    };
+    }
 
     db.collection('todoitems', function (err, collection) {
       if (err) {
         mongodb.close();
-      };
+      }
 
       collection.find({ name: username }, function (err, docs) {
         if (docs) {
@@ -104,7 +104,7 @@ User.prototype.getTodoItems = function getTodoItems(username, callback) {
       });
     });
   });
-}
+};
 User.get = function get(username, callback) {
   mongodb.open(function (err, db) {
     if (err) {

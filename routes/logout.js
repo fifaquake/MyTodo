@@ -2,4 +2,4 @@
   req.session.user = null;
 
   return res.redirect('/');
-}
+};

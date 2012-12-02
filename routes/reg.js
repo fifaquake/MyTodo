@@ -5,15 +5,15 @@ exports.index = function (req, res) {
   res.render('index', { title: '主页' });
 
   return;
-}
+};
 
 exports.reg = function (req, res) {
   res.render('register', { title: '注册' });
   return;
-}
+};
 
 exports.doReg = function (req, res) {
-  if (req.body['repeat_password'] != req.body['password']) {
+  if (req.body.repeat_password != req.body.password) {
     //req.flash('info', 'Different Passwords!');
     return res.redirect('/reg');
   }
@@ -44,4 +44,4 @@ exports.doReg = function (req, res) {
       res.redirect('/');
     });
   });
-}
+};

@@ -1,7 +1,7 @@
 ## This file is used to start mongo db server.
 
 import os
-import zipUtil
+import ZipUtil
 import urllib.request
 import shutil
 

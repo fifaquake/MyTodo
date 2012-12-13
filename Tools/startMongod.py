@@ -29,7 +29,7 @@ if not os.path.isdir(thirdParties):
 
     #unzip the downloaded file
     print('begin to unzip file')
-    zipUtil.unzipFile(localfilepath, dirname)
+    ZipUtil.unzipFile(localfilepath, dirname)
     print('Unzip Finished')
 
     #copy the unzipped file to thirdparties 

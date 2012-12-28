@@ -9,7 +9,7 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   login = require('./routes/login.js'),
-  reg = require('/routes/reg.js'),
+  reg = require('./routes/reg.js'),
   content = require('./routes/content.js'),
   logout = require('./routes/logout.js');
 

@@ -15,4 +15,4 @@ function Guid() {
       );
 }
 
-module.exports = Guid;
+//module.exports = Guid;

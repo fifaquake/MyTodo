@@ -71,24 +71,23 @@
   </div>
 </div>
 
+<script src="/javascripts/GUID.js"></script>
 <script type="text/javascript">
+function removeActiveClass() {
+  $("#home").addClass("active");
+  $("#priority_all").removeClass("active");
+  $("#priority_1").removeClass("active");
+  $("#priority_2").removeClass("active");
+  $("#priority_3").removeClass("active");
+}
 
-  $(document).ready(function() {
-    $("#home").addClass("active");
-    $("#priority_all").removeClass("active");
-    $("#priority_1").removeClass("active");
-    $("#priority_2").removeClass("active");
-    $("#priority_3").removeClass("active");
+$(document).ready(function() {
+  removeActiveClass();
   
-    // I want to show which priority is selected by the user.
-    // But here is a defect that it cannot be show correctly.
-    // var curPriorityId = "#priority_<%=locals.priority%>";
-    // $(curPriorityId).addClass("active");
-
-    // binding the "delete" for ajax
-    var allBrandDiv = $("div.brand");
-    for (var i = 0; i < allBrandDiv.size(); i++) {
-      var curDiv = allBrandDiv.get(i);
+  // binding the "delete" for ajax
+  var allBrandDiv = $("div.brand");
+  for (var i = 0; i < allBrandDiv.size(); i++) {
+    var curDiv = allBrandDiv.get(i);
       $("div", curDiv).bind('click', function(event) {
         $(this).parent().parent().remove();
         var toLink = "/deleteitem/" + this.id;
@@ -122,8 +121,8 @@
     $("#todoinput").bind('keydown',function(event) {
       // enter key is pressed
       if (event.which == '13'){
-       debugger;
       var toLink = "/content";
+      var todoId = Guid();
       $.ajax({
           url: toLink,
           dataType: "jsonp",
@@ -131,7 +130,7 @@
           jsonp:'callback',
           timeout: 5000,
           type: 'POST',
-          data: "todoinput="+$("#todoinput").val() + "&" +"todoPriority=" + $("#todoPriority").val(),
+          data: "todoinput="+$("#todoinput").val() + "&" +"todoPriority=" + $("#todoPriority").val()+"&" + "todoId="+todoId,
           success: function(data) {
             var tileDivStart = null;
             if (data["priority"] == 1) {

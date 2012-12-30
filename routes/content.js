@@ -22,7 +22,7 @@ exports.deleteTodoItem = function (req, res) {
 
 exports.addContent = function (req, res) {
   var newDate = new Date();
-  var newTodoItem = new TodoItem(null, req.body.todoinput,
+  var newTodoItem = new TodoItem(req.body.todoId, req.body.todoinput,
     newDate.toDateString(), req.body.todoPriority);
 
   var curUser = new User(res.locals.user);

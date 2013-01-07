@@ -25,7 +25,6 @@ var download_file_httpget = function (file_url) {
             file.write(data);
         }).on('end', function () {
             file.end();
-            console.log(file_name + ' downloaded to ' + DOWNLOAD_DIR);
         });
     });
 };
